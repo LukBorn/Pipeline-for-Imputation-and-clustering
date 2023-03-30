@@ -7,7 +7,7 @@ def main():
     df1 = cleancopy(og)
 
     #filters invalid values
-    filt = get_invalid(df1, percent=70)
+    filt = get_invalid(df1, percent=0.7)
     df1.drop(df1[filt].index, inplace = True)
 
     #log 2 transform every value
@@ -16,7 +16,7 @@ def main():
     #impute all missing values in copy of df1
     df2 = impute(df1, width=0.3, downshift=1.8)
 
-    
+    #define MNAR values -> impute with 1
     df = df1.mask(df1.groupby('group', axis=1).count() == 0, 1)
     df = df.where(~df.isna(), df2)
 
@@ -46,8 +46,8 @@ def cleancopy(a: pd.DataFrame):
     return b   
 
 #returns a series of Bool -> if none of the values in a group have at least x(70)% valid values
-def get_invalid(a: pd.DataFrame, percent: int = 70):
-    cutoff = (100 - percent)/100
+def get_invalid(a: pd.DataFrame, percent: float = 0.7):
+    cutoff = (1 - percent)
     b = cutoff < (a.isnull().groupby("group", axis = 1).sum()/a.groupby("group", axis = 1).size())
     c = b.all(axis = 1)
     return c 

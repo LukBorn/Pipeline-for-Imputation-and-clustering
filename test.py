@@ -13,10 +13,11 @@ import numpy as np
 merged = pd.read_csv('merged.txt', sep = '\t')
 def extract_cluster(df, cond1, cond2, cluster:int):
     df = df[df['cluster'] == cluster]
-    indices = [i for i, s in enumerate(df.columns) if cond1 in s and cond2 in s]\
-              + [60,61,62,63,64,65]
-
-    df = df.iloc[:, indices]
+    relevant_values = [i for i, s in enumerate(df.columns) if cond1 in s and cond2 in s]
+    IDs = [list(df.columns).index(ID) for ID in
+           ['Protein.Group', 'Protein.Ids', 'Protein.Names', 'Genes', 'First.Protein.Description']
+           ]
+    df = df.iloc[:, relevant_values+IDs]
     return df
 
 def generate_dict(df, clusters, save, dir):
@@ -25,14 +26,16 @@ def generate_dict(df, clusters, save, dir):
         cond1_ = 'wt_d'+str(i)
         cond2_ = 'TET3KO_d' + str(i)
         for j in clusters:
-            name = cond1_ + '_v_' + cond2_ + '_clust' + str(j)
-            dict[name] = extract_cluster(df, cond1_, cond2_, j)
+            subset = extract_cluster(df, cond1_, cond2_, j)
+            name = [df.columns[i].rstrip('_CI.L') for i, s in enumerate(df.columns) if 'CI.L' in s][0]\
+                   + '_clust' + str(j)
+            dict[name] = subset
             if save == True:
-                dict[name].to_csv(dir +'/'+ name, sep='\t')
+                dict[name].to_csv(dir +'/'+ name+ '.txt', sep='\t')
     return dict
 
 def save_dict(df, clusters, dir):
     dict = generate_dict(df, clusters)
     for i in list(dict.keys()):
-        dict[i].to_csv(dir + '/' + i, sep='\t')
+        dict[i].to_csv(dir + '/' + i + '.txt', sep='\t')
     del dict
