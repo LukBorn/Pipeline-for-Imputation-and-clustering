@@ -1,10 +1,21 @@
 import numpy as np
 import pandas as pd
-
-def main():
+import tkinter as tk
+from tkinter import filedialog
+def main(impute):
     #import DIA-NN output
     og = pd.read_csv(getfile(), sep = ";", index_col = "Protein.Group")
-    df1 = cleancopy(og)
+
+    df1 = pd.DataFrame(og)
+    df1.drop(columns=["Protein.Ids", "Protein.Names", "Genes", "First.Protein.Description"], inplace=True)
+
+    # adds a new line of values used for grouping : "group"
+    # extracted from name (must be format dx_y with x:day y:replicate)
+    new_idx = pd.MultiIndex.from_arrays([
+        df1.columns,
+        df1.columns.str.extract("(d\d+)_\d+", expand=False)
+    ], names=["index", "group"])
+    df1.columns = new_idx
 
     #filters invalid values
     filt = get_invalid(df1, percent=0.7)
@@ -26,24 +37,14 @@ def main():
     #adds the new imputed columns back to original dataframe
     og[df.columns] = df[df.columns]
     
-    #saves dataframe
-    og.to_csv("new_df.txt", sep = "\t")   
-
-
-#returns copy of a, drops unused protein descriptors, adds Multiindex
-def cleancopy(a: pd.DataFrame):
-    b = pd.DataFrame(a)
-    b.drop(columns = ["Protein.Ids","Protein.Names", "Genes", "First.Protein.Description"], inplace=True)
-    
-    #adds a new line of values used for grouping : "group"
-    #extracted from name (must be format dx_y with x:day y:replicate)
-    new_idx = pd.MultiIndex.from_arrays([
-        b.columns,
-        b.columns.str.extract("(d\d+)_\d+", expand = False)
-    ], names=["index", "group"])
-    b.columns = new_idx
-
-    return b   
+    #save dataframe
+    try:
+        # with block automatically closes file
+        with filedialog.asksaveasfile(mode='w', defaultextension=".txt") as file:
+            og.to_csv(file.name, sep = "\t")
+    except AttributeError:
+        # if user cancels save, filedialog returns None rather than a file object, and the 'with' will raise an error
+        print("The user cancelled save")
 
 #returns a series of Bool -> if none of the values in a group have at least x(70)% valid values
 def get_invalid(a: pd.DataFrame, percent: float = 0.7):
@@ -52,7 +53,7 @@ def get_invalid(a: pd.DataFrame, percent: float = 0.7):
     c = b.all(axis = 1)
     return c 
 
-def impute(a: pd.DataFrame, width: float = 0.3, downshift: float = 1.8):
+def impute_custom(a: pd.DataFrame, width: float = 0.3, downshift: float = 1.8):
     b = pd.DataFrame(a)
     for i in b.columns:
         mean = np.mean(b[i])-(downshift*np.std(b[i]))
@@ -63,12 +64,10 @@ def impute(a: pd.DataFrame, width: float = 0.3, downshift: float = 1.8):
 
 #opens explorer window and lets you input the file
 def getfile():
-    import tkinter as tk
-    from tkinter import filedialog
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename()
     return file_path
 
 if __name__ == "__main__":
-    main()
+    main(impute_custom)

@@ -1,41 +1,74 @@
 import pandas as pd
+import os
 import numpy as np
 
-#cluster = pd.read_csv("Cluster_Means_significant_proteins.txt", sep = "\t")
-#Original = pd.read_excel("Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx")
+# cluster = pd.read_csv("cluster_means.txt", sep = ",")
+#
+# Original = pd.read_csv("tet_v_wt_difference_scores.txt", sep = ",")
+# Original.set_index('ID', inplace = True)
+#
+# cluster = cluster[cluster.columns[0:2]]
+# cluster.rename(columns ={cluster.columns[0]: "ID"}, inplace = True)
+# cluster.set_index('ID', inplace = True)
+#
+# merged = pd.merge(Original, cluster, left_index=True, right_index=True, how="left")
+# merged = pd.read_csv('merged.txt', sep = '\t')
 
-#cluster = cluster[cluster.columns[0:2]]
-#cluster.rename(columns ={cluster.columns[0]: "ID"}, inplace = True)
-#cluster.set_index('ID', inplace = True)
+def save_clusters(df,
+                  cond1 = 'wt',
+                  cond2 = 'TET3KO',
+                  days = range(0,5),
+                  clusters = range(1,9),
+                  save = True,
+                  dir = 'wt_vs_TET3KO/clusters'):
 
+    if not os.path.exists(dir):
+        os.makedirs(dir)
 
-#merged = pd.merge(Original, cluster, left_index=True, right_index=True, how="left")
-merged = pd.read_csv('merged.txt', sep = '\t')
-def extract_cluster(df, cond1, cond2, cluster:int):
-    df = df[df['cluster'] == cluster]
-    relevant_values = [i for i, s in enumerate(df.columns) if cond1 in s and cond2 in s]
-    IDs = [list(df.columns).index(ID) for ID in
-           ['Protein.Group', 'Protein.Ids', 'Protein.Names', 'Genes', 'First.Protein.Description']
-           ]
-    df = df.iloc[:, relevant_values+IDs]
-    return df
-
-def generate_dict(df, clusters, save, dir):
     dict = {}
-    for i in range(0,5):
-        cond1_ = 'wt_d'+str(i)
-        cond2_ = 'TET3KO_d' + str(i)
-        for j in clusters:
-            subset = extract_cluster(df, cond1_, cond2_, j)
-            name = [df.columns[i].rstrip('_CI.L') for i, s in enumerate(df.columns) if 'CI.L' in s][0]\
-                   + '_clust' + str(j)
+    for day in days:
+        for cluster in clusters:
+            indexes = [list(df.columns).index(ID) for ID in
+                       [f'{cond1}_d{str(day)}._vs_{cond2}_d{str(day)}._diff',
+                        f'{cond1}_d{str(day)}._vs_{cond2}_d{str(day)}._p.val',
+                        'Protein.Group',
+                        'Protein.Ids',
+                        'Protein.Names',
+                        'First.Protein.Description',
+                        'cluster']
+                       ]
+            subset = df[df['cluster'] == cluster].iloc[:, indexes]
+            name = f'{cond1}_vs_{cond2}_d{day}_clust{cluster}'
             dict[name] = subset
             if save == True:
-                dict[name].to_csv(dir +'/'+ name+ '.txt', sep='\t')
+                dict[name].to_csv(f'{dir}/{name}.txt', sep='\t')
     return dict
 
-def save_dict(df, clusters, dir):
-    dict = generate_dict(df, clusters)
-    for i in list(dict.keys()):
-        dict[i].to_csv(dir + '/' + i + '.txt', sep='\t')
-    del dict
+
+def save_all(df,
+                  cond1='wt',
+                  cond2='TET3KO',
+                  days=range(0, 5),
+                  save=True,
+                  dir='wt_vs_TET3KO'):
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
+    dict = {}
+    for day in days:
+        indexes = [list(df.columns).index(ID) for ID in
+                   [f'{cond1}_d{str(day)}._vs_{cond2}_d{str(day)}._diff',
+                    f'{cond1}_d{str(day)}._vs_{cond2}_d{str(day)}._p.val',
+                    'Protein.Group',
+                    'Protein.Ids',
+                    'Protein.Names',
+                    'First.Protein.Description',
+                    'cluster']
+                   ]
+        subset = df.iloc[:, indexes]
+        name = f'{cond1}_vs_{cond2}_d{day}_all'
+        dict[name] = subset
+        if save == True:
+            dict[name].to_csv(f'{dir}/{name}.txt', sep='\t')
+    return dict
+

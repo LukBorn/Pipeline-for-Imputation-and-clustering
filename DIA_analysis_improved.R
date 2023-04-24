@@ -139,6 +139,7 @@ assay(data_imp) <- cbind(assay(data_imp_1),
                          assay(data_imp_14), 
                          assay(data_imp_15))
 
+
 data_imp_0 <- assay(data_imp)
 data_imp_0[data_imp_0 == 0] <- 1 
 assay(data_imp) <- data_imp_0
@@ -161,7 +162,7 @@ plot_missval(data_imp) # This should result in "Error: No missing values in 'dat
 assay(data_norm["MAGI1",]) # check one protein before...
 assay(data_imp["MAGI1",]) # ... and after imputation
 
-
+rm(data, data_filt, data_imp_0, data_norm, data_norm_df, data_imp_norm, data_se, data_unique, idx, LFQ_columns)
 
 
 # -- SKIP the coming part if the script is run for the first time --
@@ -171,15 +172,14 @@ assay(data_imp["MAGI1",]) # ... and after imputation
 
 
 Original <- read.xlsx(file.choose()) # Choose file "Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx"
-colnames(Original)
 row.names(Original) <- Original[,2]
+Original1 <- Original[, -c(1:2, 63:237)] # retain only gene names (row names) and replicate values
+Original1 <- data.matrix(Original1)
+assay(data_imp) <- Original1
+
+is.matrix(Original1)
 row.names(Original)
 colnames(Original)
-Original <- Original[, -c(1:2, 63:237)] # retain only gene names (row names) and replicate values
-Original <- data.matrix(Original)
-is.matrix(Original)
-assay(data_imp) <- Original
-
 
 
 # Define the comparisons
@@ -192,31 +192,11 @@ data_diff_all <- test_diff(data_imp, type = "manual", test=c("wt_d4._vs_wt_d0.",
                                                              "TET3KO_d1._vs_TET3KO_d0.", "TET3KO_d2._vs_TET3KO_d0.", "TET3KO_d3._vs_TET3KO_d0.", "TET3KO_d2._vs_TET3KO_d1.", "TET3KO_d3._vs_TET3KO_d2.",
                                                              "MeCP2KO_d0._vs_TET3KO_d0.", "MeCP2KO_d1._vs_TET3KO_d1.", "MeCP2KO_d2._vs_TET3KO_d2.", "MeCP2KO_d3._vs_TET3KO_d3.", "MeCP2KO_d4._vs_TET3KO_d4."))
 
-
+data_diff_wvT <- test_diff(data_imp, type = "manual", test=c("wt_d0._vs_TET3KO_d0.", "wt_d1._vs_TET3KO_d1.", "wt_d2._vs_TET3KO_d3.", "wt_d3._vs_TET3KO_d3.", "wt_d4._vs_TET3KO_d4."))
 
 # Denote significant proteins based on user defined cutoffs
 
-dep <- add_rejections(data_diff_all, alpha = 0.05, lfc = log2(1.5))
-
-# IF DONE FOR THE FIRST TIME ONLY!!! Export following data.frames
-
-xlsx <- get_df_wide(dep)
-xlsx1 <- get_df_wide(data_norm)
-write.xlsx(xlsx, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx"
-           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
-write.xlsx(xlsx1, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_Pre-imputation_with-MeCP2.xlsx"
-           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
-
-# If done the first time, or if the tested contrasts are changed, do also the following. File generated from xlsx variable (see step above) should not be ever modified 
-
-xlsx2 <- get_df_wide(dep)
-xlsx2 <- xlsx2[, -grep("CI", names(xlsx2))]
-write.xlsx(xlsx2, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_analysis_with-MeCP2.xlsx",
-           sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
-
-
-
-
+dep <- add_rejections(data_diff_wvT, alpha = 0.05, lfc = log2(1.5))
 
 # Plot the first and second principal components: PDF 10 x 10 inches
 
@@ -494,7 +474,7 @@ plot_heatmap_Eli <- function (dep, type = c("contrast", "centered"),
                                 col_limit, (col_limit/5)), rev(RColorBrewer::brewer.pal(11, 
                                                                                         "RdBu")))
   interesting = which(row.names(df) %in% c("NEUROG1", "NEUROG2", "TUBB3", "SOX2", "MKI67", "PCNA", "DCX", "NEFL", "NEFM", "CALB2", "SYT1", "SYT2", "CADM1", "JAK1", "SMAD1", "NANOG", "SYT4",
-                                           "PAX6", "TET3", "MECP2", "OTX2", "ID4", "SYN3", "PROM1", "PROX1", "BCL2", "BAX", "CUX1", "BCL11B", "SATB2", "CAMK4"))
+                                           "PAX6", "TET3", "MECP2", "DNMT3A", "DNMT3B", "DNMT1", "UHRF1"))
   ann = rowAnnotation(foo = anno_mark(at = interesting, labels = row.names(df[interesting,])))
   
   ht1 = Heatmap(df, col = f1, split = if (kmeans) {       df_kmeans$cluster
@@ -528,6 +508,97 @@ plot_heatmap_Eli <- function (dep, type = c("contrast", "centered"),
     data.frame(protein = row.names(return), return) %>% mutate(order = row_number())
   }
 }
+
+plot_heatmap_Lukas <- function (dep,type = "centered", 
+                                kmeans = TRUE, 
+                                k = 8, 
+                                col_limit = 2, 
+                                indicate = NULL,
+                                show_row_names = FALSE, 
+                                clustering_distance = "euclidean", 
+                                clustering_method_rows = "ward.D2", 
+                                row_dend_side = "left", 
+                                row_dend_gp = gpar(lwd = 1), 
+                                row_title_side = "left",
+                                row_font_size = 15, 
+                                col_font_size = 10,
+                                plot = TRUE,
+                                cluster_columns=FALSE) 
+{
+  #put these variables in correct datatype 
+  k <- as.numeric(k)
+  col_limit <- as.numeric(col_limit)
+  row_font_size <- as.numeric(row_font_size)
+  col_font_size <- as.numeric(col_font_size)
+  
+  clustering_distance <- match.arg(clustering_distance)
+  
+  ha1 <- NULL
+
+  #get only significant values
+  filtered <- dep[row_data$significant,]
+  
+
+  rowData(filtered)$mean <- rowMeans(assay(filtered), na.rm = TRUE)
+  rowData(filtered)$sd <- sd(assay(filtered), na.rm = TRUE)
+  df <- (assay(filtered) - rowData(filtered, use.names = FALSE)$mean)/rowData(filtered, use.names = FALSE)$sd
+    
+  set.seed(1)
+  k = 8
+  df_kmeans <- kmeans(df, k)
+  
+  order <- data.frame(df) %>% cbind(., cluster = df_kmeans$cluster) %>% 
+            mutate(row = apply(.[, seq_len(ncol(.) - 1)], 1, function(x) max(x))) %>% group_by(cluster) %>% 
+            summarize(index = sum(row)/n()) %>% 
+            arrange(desc(index)) %>% 
+            pull(cluster) %>% 
+            match(seq_len(k), .)
+  
+  df_kmeans$cluster <- order[df_kmeans$cluster]
+  
+  legend <- ifelse(type == "contrast", "log2 Fold change", "Z-score")
+  
+  f1 = circlize::colorRamp2(seq(-col_limit, 
+                                col_limit, (col_limit/5)), rev(RColorBrewer::brewer.pal(11, 
+                                                                                        "RdBu")))
+  interesting = which(row.names(df) %in% c("NEUROG1", "NEUROG2", "TUBB3", 
+                                           "SOX2", "MKI67", "PCNA", 
+                                           "DCX", "NEFL", "NEFM", 
+                                           "CALB2", "SYT1", "SYT2", 
+                                           "CADM1", "JAK1", "SMAD1", 
+                                           "NANOG", "SYT4", "PAX6", 
+                                           "TET3", "MECP2", "OTX2", 
+                                           "ID4", "SYN3", "PROM1", 
+                                           "PROX1", "BCL2", "BAX", 
+                                           "CUX1", "BCL11B", "SATB2", 
+                                           "CAMK4", "DNMT3A", "DNMT3B"
+                                           "DNMT1", "UHRF1"))
+  
+  ann = rowAnnotation(foo = anno_mark(at = interesting, labels = row.names(df[interesting,])))
+  
+  ht1 = Heatmap(df, 
+                col = f1, 
+                split = if (kmeans) {df_kmeans$cluster} else {NULL}, 
+                cluster_rows = col_clust,  
+                column_names_side = "top", 
+                clustering_distance_rows = clustering_distance,  
+                heatmap_legend_param = list(color_bar = "continuous", 
+                                            legend_direction = "horizontal", 
+                                            legend_width = unit(4, "cm"), 
+                                            title_position = "topcenter"), 
+                name = legend, 
+                row_names_gp = gpar(fontsize = row_font_size), 
+                column_names_gp = gpar(fontsize = col_font_size), top_annotation = ha1,
+                right_annotation = ann, 
+                ...)
+  
+  
+
+  draw(ht1, heatmap_legend_side = "top")
+
+}
+
+
 
 # Internal function to get ComplexHeatmap::HeatmapAnnotation object
 get_annotation <- function(dep, indicate) {
@@ -583,8 +654,7 @@ get_annotation <- function(dep, indicate) {
                                     show_annotation_name = TRUE)
 }
 
-
-plot_heatmap_Eli(dep, type = "centered", 
+test <- plot_heatmap_Eli(dep, type = "centered", 
                  kmeans = TRUE, 
                  k = 8, 
                  col_limit = 2, 
@@ -596,7 +666,8 @@ plot_heatmap_Eli(dep, type = "centered",
                  row_title_side = "left",
                  row_font_size = 15, 
                  col_font_size = 10, 
-                 cluster_columns=FALSE) 
+                 cluster_columns=FALSE,
+                 plot = TRUE) 
 # !!! WATCH OUT: the size of the plot panel in RStudio affects the correct indication of proteins. Reshape it BEFORE running the last command and DO NOT resize when exporting!
 
 
@@ -1086,5 +1157,20 @@ extract_cluster_se <-function(cmat, #matrix with cluster annotation
   return(get_df_wide(se))
 }
 
+# IF DONE FOR THE FIRST TIME ONLY!!! Export following data.frames
+# dep/xlsx is the one excel file i always import
 
+xlsx <- get_df_wide(dep)
+xlsx1 <- get_df_wide(data_norm)
+write.xlsx(xlsx, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx"
+           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
+write.xlsx(xlsx1, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_Pre-imputation_with-MeCP2.xlsx"
+           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
+
+# If done the first time, or if the tested contrasts are changed, do also the following. File generated from xlsx variable (see step above) should not be ever modified 
+
+xlsx2 <- get_df_wide(dep)
+xlsx2 <- xlsx2[, -grep("CI", names(xlsx2))]
+write.xlsx(xlsx2, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_analysis_with-MeCP2.xlsx",
+           sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
 
