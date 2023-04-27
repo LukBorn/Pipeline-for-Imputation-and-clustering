@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
-def main(impute):
+def main(impute,
+         filt_invalid = True):
     #import DIA-NN output
     og = pd.read_csv(getfile(), sep = ";", index_col = "Protein.Group")
 
@@ -17,9 +18,10 @@ def main(impute):
     ], names=["index", "group"])
     df1.columns = new_idx
 
-    #filters invalid values
-    filt = get_invalid(df1, percent=0.7)
-    df1.drop(df1[filt].index, inplace = True)
+    if filt_invalid:
+        #filters invalid values
+        filt = get_invalid(df1, percent=0.7)
+        df1.drop(df1[filt].index, inplace = True)
 
     #log 2 transform every value
     df1 = df1.applymap(np.log2)
