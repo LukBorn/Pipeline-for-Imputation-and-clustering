@@ -1,0 +1,89 @@
+
+----------------------------------------------------------------------------------Folder contains 7 files
+----------------------------------------------------------------------------------Processing 1/7 files
+Parsing file 'Chroma_Lif_WT_AzadCvsctr.txt'
+Parsing complete. File has 4971 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4955 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 2/7 files
+Parsing file 'Chroma_Lif_WT_AzaCvsctr.txt'
+Parsing complete. File has 4971 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4955 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 3/7 files
+Parsing file 'Chroma_Lif_DNMT-TKO_AzadCvsctr.txt'
+Parsing complete. File has 4971 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4955 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 4/7 files
+Parsing file 'Chroma_Lif_DNMT-TKO_AzaCvsctr.txt'
+Parsing complete. File has 4971 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4955 rows mapped.
+Number of observations=1
+Expression types=Expr p-value,Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 5/7 files
+Parsing file 'Chromatin_2iL_WT_AzadCvsCtrl.txt'
+Parsing complete. File has 4996 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+1253 rows mapped.
+Number of observations=1
+Expression types=Expr p-value,Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 6/7 files
+Parsing file 'Chromatin_2iL_WT_AzaCvsCtrl.txt'
+Parsing complete. File has 4996 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4977 rows mapped.
+Number of observations=1
+Expression types=Expr p-value,Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Processing 7/7 files
+Parsing file 'Chromatin_2iL_DNMT-TKO_AzadCvsCtrl.txt'
+Parsing complete. File has 4996 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+4977 rows mapped.
+Number of observations=1
+Expression types=Expr p-value,Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\Aza\Successfully Uploaded 2023-05-04 16-22-47.
+----------------------------------------------------------------------------------Finished uploading file.
+Total number of files: 7
+Successfully Uploaded: 7

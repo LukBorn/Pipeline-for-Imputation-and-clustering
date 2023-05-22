@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from scipy.stats import wilcoxon
-from statsmodels.stats.multitest import multipletests
+import ProtRank as pr
+
 import tkinter as tk
 from tkinter import filedialog
 import os
@@ -10,14 +10,60 @@ class Pipeline_tracker:
     """
     class to keep track of pipeline progress
     for example no GSEA before normalization
-     """
-
-
+    """
 trk = Pipeline_tracker
 
 
-def DIANN_to_df():
-    ...
+def Linda_xml_to_ipa(dir):
+    df, fp = import_df_old()
+    print(df.columns)
+    pval = input('pval:')
+    difference = input('difference:')
+    relevant = df[[pval, difference]]
+    relevant = relevant.applymap(lambda a: float(a.replace(",",".")))
+    relevant[pval] = relevant[pval].apply(lambda a: 2**-a)
+
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    name = fp.rsplit(sep='/', maxsplit=1)[1].rstrip('_bea.xls')
+    relevant.to_csv(f'{dir}/{name}.txt', sep = '\t')
+
+def import_df():
+    df = pr.load_data(ignore_cols = ['Protein.Group', 'Protein.Names', 'Genes', 'First.Protein.Description'],
+                      index_col = 'Protein.Ids')
+    #df.columns = df.columns.str.replace(r'^\\(.+\\)*.+\..+$', '')
+    #df.columns = df.columns.str.lstrip('H:\Proteomics_Traube\mESC_AzaProject\DIA\DIA_chromatin\\20230113_')
+    return df
+
+def import_df_old(filepath = None):
+    # assert type in ['DIANN', 'Perseus', 'Excel']
+    if filepath == None:
+        filepath = get_filepath()
+
+    try:
+        df = pd.read_csv(filepath, sep="\t")
+    except UnicodeDecodeError:
+        df = pd.read_excel(filepath)
+
+    try:
+        df = first_ID_as_index(df, 'Protein.Ids')
+    except KeyError:
+        print('couldnt set index correctly \n use index_as_first_ID() to correctly set index \n'
+              + df.columns)
+        df = first_ID_as_index(df, input('correct column:'))
+
+    return df, filepath
+
+def first_ID_as_index(df: pd.DataFrame,
+                      column: str = 'Protein.Ids'):
+    """
+    Sets the index as the first value of the specified column
+    :param df: dataframe to set the index
+    :param column: name of the column containing the index
+    :return:
+    """
+    return df.set_index(df[column].str.split(';', n=1).str[0])
+
 
 def filt_invalid(df,
                  percent):
@@ -29,8 +75,10 @@ def filt_invalid(df,
     return _remove_multiindex(df)
 
 def log2_transform(df):
-    return df.applymap(np.log2)
-
+    if type(df) == pd.DataFrame:
+        return df.applymap(np.log2)
+    else:
+        return df.apply(np.log2)
 def custom_impute(df,
                   mnar = 0,
                   width = 0.3,
@@ -39,7 +87,7 @@ def custom_impute(df,
 
     :param df:
     :param mnar: max number of non-NAN values to be missing not at random
-    :param width:
+    :param width: standard deviation of the
     :param downshift:
     :return:
     """
@@ -64,9 +112,10 @@ def normalize():
     #normalize all log 2 foldchanges
     ...
 
-def diff_GSEA(df,
+def diff_wilcox(df,
               comparisons):
-
+    from scipy.stats import wilcoxon
+    from statsmodels.stats.multitest import multipletests
     alpha = 0.05
 
     df = _add_multiindex(df)
@@ -77,22 +126,24 @@ def diff_GSEA(df,
             warnings.warn(f"the conditions found in {comparison} cant be found in df")
             print(df.columns)
 
-        group1 = df[df.groupby['group'] == cond1]
-        group2 = df[df.groupby['group'] == cond2]
+        group1 = df[df['group'] == cond1]
+        group2 = df[df['group'] == cond2]
 
+        for idx, (row1, row2) in enumerate(zip(group1.values, group2.values)):
+            wilc = wilcoxon(row1, row2)
 
         # Separate the data into the two groups
         # group1 = df.iloc[:, group1_cols].values
         # group2 = df.iloc[:, group2_cols].values
 
         # Compute the Wilcoxon test statistic and p-values for each row
-        tstat, pvalue = wilcoxon(group1, group2, axis=1, alternative='two-sided')
+        wilc = wilcoxon(group1, group2, axis=1)
 
         # Compute the log-fold changes
         logFC = np.log2(np.mean(group1, axis=1) / np.mean(group2, axis=1))
 
         # Adjust the p-values for multiple testing
-        _, pvalue, _, _ = multipletests(pvalue, alpha=alpha, method='fdr_bh')
+        _, pvalue, _, _ = multipletests(wilc.pvalue, alpha=alpha, method='fdr_bh')
 
         return pd.Series(logFC, index=df.index), pd.Series(pvalue, index=df.index)
 
@@ -194,3 +245,8 @@ def _add_multiindex(df):
 def _remove_multiindex(df):
     df.columns = df.columns.droplevel(["group"])
     return df
+
+def get_filepath():
+    root = tk.Tk()
+    root.withdraw()
+    return filedialog.askopenfilename()

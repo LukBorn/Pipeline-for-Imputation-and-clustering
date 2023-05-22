@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02398a84-f943-4320-9639-6d509a9507d7" name="Changes" comment="24.04 just standard commit">
+    <list default="true" id="02398a84-f943-4320-9639-6d509a9507d7" name="Changes" comment="27.04 starting work on analysis pipeline">
+      <change afterPath="$PROJECT_DIR$/ProtRank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DIA_analysis_improved.R" beforeDir="false" afterPath="$PROJECT_DIR$/DIA_analysis_improved.R" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imputation_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/imputation_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_scripts/DIANN_to_finished_output.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_scripts/DIANN_to_finished_output.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/split_clusters.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python310/Lib/site-packages/pandas/core/frame.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -37,14 +40,51 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/sepps/Documents/wörk/Pipeline-for-Imputation-and-clustering/test gpt.py",
+    "last_opened_file_path": "C:/Users/sepps/Documents/wörk/Pipeline-for-Imputation-and-clustering/imputation_pipeline.py",
     "settings.editor.selected.configurable": "pyconsole"
   }
 }]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myUseExistingConsole" value="true" />
   </component>
-  <component name="RunManager" selected="Python.test gpt">
+  <component name="RunManager" selected="Python.imputation_pipeline">
+    <configuration name="ProtRank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Pipeline-for-Imputation-and-clustering" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ProtRank.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="imputation_pipeline" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Pipeline-for-Imputation-and-clustering" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\sepps\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="SDK_NAME" value="Python 3.10" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/imputation_pipeline.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="split_clusters" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Pipeline-for-Imputation-and-clustering" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -71,6 +111,9 @@
       <module name="Pipeline-for-Imputation-and-clustering" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\sepps\AppData\Local\Programs\Python\Python310\python.exe" />
       <option name="SDK_NAME" value="Python 3.10" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -89,7 +132,14 @@
     <list>
       <item itemvalue="Python.split_clusters" />
       <item itemvalue="Python.test gpt" />
+      <item itemvalue="Python.imputation_pipeline" />
+      <item itemvalue="Python.ProtRank" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ProtRank" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -107,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682343444527</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="27.04 starting work on analysis pipeline">
+      <created>1682608691936</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682608691936</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,6 +180,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="24.04 just standard commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="24.04 just standard commit" />
+    <MESSAGE value="27.04 starting work on analysis pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="27.04 starting work on analysis pipeline" />
   </component>
 </project>

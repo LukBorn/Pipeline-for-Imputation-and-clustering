@@ -1,0 +1,485 @@
+
+----------------------------------------------------------------------------------Folder contains 40 files
+----------------------------------------------------------------------------------Processing 1/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust8.txt'
+Parsing complete. File has 1060 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+1058 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 2/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust7.txt'
+Parsing complete. File has 275 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - rat (Entrez Gene),Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+274 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 3/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust6.txt'
+Parsing complete. File has 181 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 4/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust5.txt'
+Parsing complete. File has 279 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+278 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 5/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust4.txt'
+Parsing complete. File has 182 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 6/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust3.txt'
+Parsing complete. File has 503 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+502 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 7/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust2.txt'
+Parsing complete. File has 285 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+284 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 8/40 files
+Parsing file 'wt_vs_TET3KO_d4_clust1.txt'
+Parsing complete. File has 537 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+534 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 9/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust8.txt'
+Parsing complete. File has 1060 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+1058 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 10/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust7.txt'
+Parsing complete. File has 275 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - rat (Entrez Gene),Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+274 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 11/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust6.txt'
+Parsing complete. File has 181 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 12/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust5.txt'
+Parsing complete. File has 279 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+278 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 13/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust4.txt'
+Parsing complete. File has 182 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 14/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust3.txt'
+Parsing complete. File has 503 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+502 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 15/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust2.txt'
+Parsing complete. File has 285 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+284 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 16/40 files
+Parsing file 'wt_vs_TET3KO_d3_clust1.txt'
+Parsing complete. File has 537 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+534 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 17/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust8.txt'
+Parsing complete. File has 1060 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+1058 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 18/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust7.txt'
+Parsing complete. File has 275 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - rat (Entrez Gene),Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+274 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 19/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust6.txt'
+Parsing complete. File has 181 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 20/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust5.txt'
+Parsing complete. File has 279 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+278 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 21/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust4.txt'
+Parsing complete. File has 182 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 22/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust3.txt'
+Parsing complete. File has 503 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+502 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 23/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust2.txt'
+Parsing complete. File has 285 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+284 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 24/40 files
+Parsing file 'wt_vs_TET3KO_d2_clust1.txt'
+Parsing complete. File has 537 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+534 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 25/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust8.txt'
+Parsing complete. File has 1060 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+1058 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 26/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust7.txt'
+Parsing complete. File has 275 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - rat (Entrez Gene),Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+274 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 27/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust6.txt'
+Parsing complete. File has 181 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 28/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust5.txt'
+Parsing complete. File has 279 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+278 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 29/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust4.txt'
+Parsing complete. File has 182 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 30/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust3.txt'
+Parsing complete. File has 503 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+502 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 31/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust2.txt'
+Parsing complete. File has 285 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+284 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 32/40 files
+Parsing file 'wt_vs_TET3KO_d1_clust1.txt'
+Parsing complete. File has 537 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+534 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 33/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust8.txt'
+Parsing complete. File has 1060 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+1058 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 34/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust7.txt'
+Parsing complete. File has 275 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - rat (Entrez Gene),Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+274 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 35/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust6.txt'
+Parsing complete. File has 181 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 36/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust5.txt'
+Parsing complete. File has 279 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+278 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 37/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust4.txt'
+Parsing complete. File has 182 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+180 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 38/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust3.txt'
+Parsing complete. File has 503 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+502 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 39/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust2.txt'
+Parsing complete. File has 285 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+284 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value,Expr Fold Change
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Processing 40/40 files
+Parsing file 'wt_vs_TET3KO_d0_clust1.txt'
+Parsing complete. File has 537 rows and 8 columns
+Guessing identifier types
+Guessed identifier types=Gene Symbol - human (HUGO / HGNC / Entrez Gene)
+Validating data in file.
+534 rows mapped.
+Number of observations=1
+Expression types=Expr Log Ratio,Expr p-value
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\wt_vs_TET3KO\clusters\Successfully Uploaded 2023-04-24 13-57-21.
+----------------------------------------------------------------------------------Finished uploading file.
+Total number of files: 40
+Successfully Uploaded: 40

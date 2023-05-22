@@ -1,0 +1,101 @@
+
+----------------------------------------------------------------------------------Folder contains 8 files
+----------------------------------------------------------------------------------Processing 1/8 files
+Parsing file 'WT_WP_2iL_dCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 7346 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+7330 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 2/8 files
+Parsing file 'WT_WP_2iL_AzaCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 7346 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+7330 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 3/8 files
+Parsing file 'WP_Lif_WT_AzadCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 6159 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+6136 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 4/8 files
+Parsing file 'WP_Lif_WT_AzaCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 6159 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+6136 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 5/8 files
+Parsing file 'WP_Lif_DNMT-TKO_AzadCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 3029 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+3023 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 6/8 files
+Parsing file 'WP_Lif_DNMT-TKO_AzaCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 3029 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+3023 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 7/8 files
+Parsing file 'DNMT-TKO_WP_2iL_AzadCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 6877 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+6862 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Processing 8/8 files
+Parsing file 'DNMT-TKO_WP_2iL_AzaCvsCtrl-66perc.txt.txt'
+Parsing complete. File has 6877 rows and 3 columns
+Guessing identifier types
+Guessed identifier types=GenPept,UniProt/Swiss-Prot Accession
+Validating data in file.
+6862 rows mapped.
+Number of observations=2
+Expression types=Expr Log Ratio
+Validation complete. Uploading file.
+Upload complete.
+Unable to move file to C:\Users\sepps\Documents\wörk\Pipeline-for-Imputation-and-clustering\linda_wp\Successfully Uploaded 2023-05-09 16-00-46.
+----------------------------------------------------------------------------------Finished uploading file.
+Total number of files: 8
+Successfully Uploaded: 8

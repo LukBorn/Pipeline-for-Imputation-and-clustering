@@ -19,197 +19,175 @@ library("RColorBrewer")
 library("openxlsx")
 library("pals")
 library("ggpubr")
+library("clusterProfiler")
+library("factoextra")
+library("NbClust")
 
-#set a random seed -> todo check if DEP imputation uses this random seed
-#set.seed(42)
+#set a random seed
+set.seed(42)
 
-data <- read.table(file.choose(), fill = TRUE, sep = "\t", header = TRUE, quote = "") # Choose file "BeforeImputation_with_MeCP2.txt"
-colnames(data) <- gsub("T..", "", colnames(data), fixed = TRUE)
-colnames(data)
+data_original <- read.table(file.choose(), fill = TRUE, sep = "\t", header = TRUE, quote = "") # Choose file "BeforeImputation_with_MeCP2.txt"
+colnames(data_original) <- gsub("T..", "", colnames(data_original), fixed = TRUE)
+    colnames(data_original)
 
 
 # To visualize all duplicate values in order of frequency in the table
-data %>% group_by(Genes) %>% summarize(frequency = n()) %>% 
+data_original %>% group_by(Genes) %>% summarize(frequency = n()) %>% 
   arrange(desc(frequency)) %>% filter(frequency > 1)
 
 # To rename duplicate values
-data$Genes %>% duplicated() %>% any()
-data_unique <- data_unique <- make_unique(data, "Genes", "Protein.Ids", delim = ";")
-data$name %>% duplicated() %>% any()
+    data_original$Genes %>% duplicated() %>% any() 
+data_original <- make_unique(data_original, "Genes", "Protein.Ids", delim = ";")
+    data_original$name %>% duplicated() %>% any() #should be false
 
 # Generate a SummarizedExperiment object by parsing condition information from the column names
-LFQ_columns <- grep("LFQ.intensity.", colnames(data_unique)) # get data column numbers
-data_se <- make_se_parse(data_unique, LFQ_columns)
-data_se
-str(data_se)
-
-plot_frequency(data_se)
+data_se <- make_se_parse(data_original, grep("LFQ.intensity.", colnames(data_original)))
+    
+    plot_frequency(data_se)
 
 # Less stringent filtering:
 # Filter for proteins that are identified in all replicates -1 of at least one condition
 data_filt <- filter_missval(data_se, thr = 1)
-str(data_filt)
-plot_numbers(data_filt)
 
 # Normalize the data
 data_norm <- normalize_vsn(data_filt)
-rmmeanSdPlot(data_norm)
-meanSdPlot(data_filt)
 
-
-
-# Visualize normalization by boxplots for all samples before and after normalization
-plot_normalization(data_filt, data_norm)
-
-# Plot a heatmap of proteins with missing values
-plot_missval(data_filt)
-
-# Plot intensity distributions and cumulative fraction of proteins with and without missing values
-plot_detect(data_filt)
+    #plot number of proteins per sample
+    plot_numbers(data_filt)
+    # Plot a heatmap of proteins with missing values
+    plot_missval(data_filt)
+    # Plot intensity distributions and cumulative fraction of proteins with and without missing values
+    plot_detect(data_filt)
+    #visualize changed meanSD
+    rmmeanSdPlot(data_norm)
+    meanSdPlot(data_filt)
+    # Visualize normalization by boxplots for all samples before and after normalization
+    plot_normalization(data_filt, data_norm)
 
 # Perform a mixed imputation
+data <- data_norm
 
-colnames(data_norm)
-str(data_norm)
-data_norm_df <- get_df_wide(data_norm)
-colnames(data_norm_df)
+set.seed(42)
 
-impute_group <- function(data_norm_df, #get_df_wide() of summerizedExperiment object
-                         start, end, #start and end column indexes of group to impute
-                         valid = 3, #number of missing values per group to be MNAR
-                         shift = 1.8, #shift and scale of MAR imputation
-                         scale = 0.3,
-                         seed = 42 #random seed for MAR imputation
-                         ){
-  set.seed(seed)
-  data_norm_df_x <- data_norm_df[, c(1, start:end)]
+for (condition in unique(data$condition)){
+  col_ids <- grep(condition, colnames(data))
+  data_x <- data[, col_ids]
   
-  #MNAR imputation
-  protein_MNAR_x <- data_norm_df_x[rowSums(is.na(data_norm_df_x)) >= valid] %>%
-    pull(name) %>%
-    unique()
-  
-  MNAR_x <- names(data_norm) %in% proteins_MNAR_x
-  
-  data_norm_x <- data_norm[, start:end]
+  protein_MNAR_x <- unique(
+    rownames(data_x[rowSums(is.na(get_df_wide(data_x))) <= 3]) #3 is the min number of missing values to be MNAR  
+                          )
+  MAR_x <- rownames(data) %in% protein_MNAR_x
   
   data_imp_x <- DEP::impute(
-    data_norm_x, 
+    data_x, 
     fun = "mixed",
-    randna = !MNAR_x, # we have to define MAR which is the opposite of MNAR
-    mar = "none", # imputation function for MAR
+    randna = MAR_x, 
+    mar = "none", # imputation function for MAR -> leave them na
     mnar = "zero") # imputation function for MNAR
   
-  data_imp_x[data_imp_x == 0] <- 1
+  data_imp_x <- DEP::impute(
+    data_imp_x, 
+    fun = "man", 
+    shift = 1.8,
+    scale = 0.3)
   
-  rm(MNAR_x,data_norm_x, data_norm_df_x)
-  return(data_imp_x)
+  assay(data_imp_x)[assay(data_imp_x) == 0] <- 1
+  
+  assay(data[,col_ids]) <- assay(data_imp_x)
+  
+  rm(data_imp_x, data_x, MAR_x, protein_MNAR_x, col_ids, condition)
 }
 
-data_imp_1 <-impute_group(data_norm_df,2,5)
-data_imp_2 <-impute_group(data_norm_df,6,9)
-data_imp_3 <-impute_group(data_norm_df,10,13)
-data_imp_4 <-impute_group(data_norm_df,14,17)
-data_imp_5 <-impute_group(data_norm_df,18,21)
-data_imp_6 <-impute_group(data_norm_df,22,25)
-data_imp_7 <-impute_group(data_norm_df,26,29)
-data_imp_8 <-impute_group(data_norm_df,30,33)
-data_imp_9 <-impute_group(data_norm_df,34,37)
-data_imp_10 <-impute_group(data_norm_df,38,41)
-data_imp_11 <-impute_group(data_norm_df,42,45)
-data_imp_12 <-impute_group(data_norm_df,46,49)
-data_imp_13 <-impute_group(data_norm_df,50,53)
-data_imp_14 <-impute_group(data_norm_df,54,57)
-data_imp_15 <-impute_group(data_norm_df,58,61)
-
-data_imp <- cbind(data_norm)
-assay(data_imp) <- cbind(assay(data_imp_1),
-                         assay(data_imp_2), 
-                         assay(data_imp_3),
-                         assay(data_imp_4),
-                         assay(data_imp_5),
-                         assay(data_imp_6),
-                         assay(data_imp_7),
-                         assay(data_imp_8), 
-                         assay(data_imp_9), 
-                         assay(data_imp_10),  
-                         assay(data_imp_11), 
-                         assay(data_imp_12), 
-                         assay(data_imp_13), 
-                         assay(data_imp_14), 
-                         assay(data_imp_15))
+    #plot and test imputation
+    plot_imputation(data_norm, data_imp)
+    plot_missval(data) # This should result in "Error: No missing values in 'data_imp'"
+    
+    assay(data_norm["MAGI1",]) # check one protein before...
+    assay(data["MAGI1",]) # ... and after imputation
+rm(data_filt, data_se, data_norm)
+    
+# save the imputed data
+write.csv(get_df_wide(data), file.choose())
+# load imputed data
+data <- read.csv(file.choose()) 
+data <- make_se_parse(data, grep("LFQ.intensity.", colnames(data)))
 
 
-data_imp_0 <- assay(data_imp)
-data_imp_0[data_imp_0 == 0] <- 1 
-assay(data_imp) <- data_imp_0
+all_comparisons <- c("wt_d0._vs_TET3KO_d0.","wt_d1._vs_TET3KO_d1.","wt_d2._vs_TET3KO_d2.","wt_d3._vs_TET3KO_d3.","wt_d4._vs_TET3KO_d4.",
+                 "wt_d0._vs_MeCP2KO_d0.","wt_d1._vs_MeCP2KO_d1.","wt_d2._vs_MeCP2KO_d2.","wt_d3._vs_MeCP2KO_d3.","wt_d4._vs_MeCP2KO_d4.",
+                 "TET3KO_d0._vs_MeCP2KO_d0.","TET3KO_d1._vs_MeCP2KO_d1.","TET3KO_d2._vs_MeCP2KO_d2.","TET3KO_d3._vs_MeCP2KO_d3.","TET3KO_d4._vs_MeCP2KO_d4.",
+                 "wt_d0._vs_wt_d1.","wt_d0._vs_wt_d2.","wt_d0._vs_wt_d3.","wt_d0._vs_wt_d4.",
+                 "TET3KO_d0._vs_TET3KO_d1.","TET3KO_d0._vs_TET3KO_d2.","TET3KO_d0._vs_TET3KO_d3.","TET3KO_d0._vs_TET3KO_d4.",
+                 "MeCP2KO_d1._vs_MeCP2KO_d1.","MeCP2KO_d1._vs_MeCP2KO_d2.","MeCP2KO_d1._vs_MeCP2KO_d3.","MeCP2KO_d1._vs_MeCP2KO_d4.")
+# Define the comparisons and
+# denote significant proteins based on user defined cutoffs
+data_diff <- add_rejections(test_diff(data, 
+                                      type = "manual", 
+                                      test = all_comparisons),
+                            alpha = 0.05, 
+                            lfc = log2(1.5))
 
-# We can impute the whole dataset and then impute all NAs remaining values from earlier with values from this new whole-imputation data frame
-
-# -- SKIP this part if a prior imputation was already performed (and go directly to the next) --
-
-data_imp_norm <- DEP::impute(data_norm, fun = "man", shift = 1.8, scale = 0.3)
-data_imp_norm <- assay(data_imp_norm)
-
-idx <- is.na(data_imp_0)
-data_imp_0[idx] <- data_imp_norm[idx]
-
-assay(data_imp) <- data_imp_0
-
-plot_imputation(data_norm, data_imp)
-plot_missval(data_imp) # This should result in "Error: No missing values in 'data_imp'"
-
-assay(data_norm["MAGI1",]) # check one protein before...
-assay(data_imp["MAGI1",]) # ... and after imputation
-
-rm(data, data_filt, data_imp_0, data_norm, data_norm_df, data_imp_norm, data_se, data_unique, idx, LFQ_columns)
+# export data for ipa analysis
+ipa_export <- get_df_wide(data_diff)
+ipa_export <- export[,-c(grep('CI.R', colnames(data_diff)),
+                         grep('CI.L', colnames(data_diff)),
+                         grep('p.val', colnames(data_diff)))]
+write.csv(ipa_export, file.choose(), sep = ";")
+rm(ipa_export)
 
 
-# -- SKIP the coming part if the script is run for the first time --
+#TODO add a way to GO enrichment analyse either each LFQ column and or each comparison
 
-# With every round, imputation always changes! To avoid this, re-use previously imputed and exported data
-# to avoid this define a random seed...
+# 1. prepare a ranked list from the data:
+# for LFQ data: find a good test statistic (better: many test statistics)
+# for comparisons: choose between diff score and pvalue (i think diff is more sensible)
+#
+# 2. perform GSEA on ranked list 
+# using either GO analysis, Kegg, reactome
+# 
+# 3. visualisation 
+# bar plot
+# some type of interaction plot thing
+
+rank_LFQ <- function(data,
+                     condition
+                     ){
+  #assertthat::assert_that("condition not found in data",
+  #       condition %in% data$condition)
+  LFQ <- assay(data[, data$condition == condition])
+  return(sort(rowMeans(LFQ), decreasing = TRUE))
+  rm(LFQ) 
+}
+
+rank_comparison <- function(data,
+                      condition1,
+                      condition2
+                      ){
+  #assertthat::assert_that("conditions not found in data", 
+  #       condition1 %in% data %and% condition2 %in% data$condition)
+  comparison <- gsub(" ","",paste(condition1, "_vs_", condition2))
+  diff_str <- gsub(" ","",paste(comparison,"_diff"))
+  diff <- add_rejections(test_diff(data, 
+                                  type = "manual", 
+                                  test = comparison),
+                        alpha = 0.05, 
+                        lfc = log2(1.5))
+  diff <- get_df_wide(diff)[, c("name",diff_str)]
+  rownames(diff) <- diff$name
+  return(sort(diff[,diff_str], decreasing = TRUE))
+  rm(comparison, diff_str, diff)
+}
 
 
-Original <- read.xlsx(file.choose()) # Choose file "Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx"
-row.names(Original) <- Original[,2]
-Original1 <- Original[, -c(1:2, 63:237)] # retain only gene names (row names) and replicate values
-Original1 <- data.matrix(Original1)
-assay(data_imp) <- Original1
-
-is.matrix(Original1)
-row.names(Original)
-colnames(Original)
 
 
-# Define the comparisons
 
-assay(data_imp)
 
-data_diff_all <- test_diff(data_imp, type = "manual", test=c("wt_d4._vs_wt_d0.", "wt_d4._vs_wt_d1.", "wt_d4._vs_wt_d2.", "wt_d4._vs_wt_d3.", 
-                                                             "wt_d1._vs_wt_d0.", "wt_d2._vs_wt_d0.", "wt_d3._vs_wt_d0.", "wt_d2._vs_wt_d1.", "wt_d3._vs_wt_d2.",
-                                                             "TET3KO_d4._vs_TET3KO_d0.", "TET3KO_d4._vs_TET3KO_d1.", "TET3KO_d4._vs_TET3KO_d2.", "TET3KO_d4._vs_TET3KO_d3.",
-                                                             "TET3KO_d1._vs_TET3KO_d0.", "TET3KO_d2._vs_TET3KO_d0.", "TET3KO_d3._vs_TET3KO_d0.", "TET3KO_d2._vs_TET3KO_d1.", "TET3KO_d3._vs_TET3KO_d2.",
-                                                             "MeCP2KO_d0._vs_TET3KO_d0.", "MeCP2KO_d1._vs_TET3KO_d1.", "MeCP2KO_d2._vs_TET3KO_d2.", "MeCP2KO_d3._vs_TET3KO_d3.", "MeCP2KO_d4._vs_TET3KO_d4."))
 
-data_diff_wvT <- test_diff(data_imp, type = "manual", test=c("wt_d0._vs_TET3KO_d0.", "wt_d1._vs_TET3KO_d1.", "wt_d2._vs_TET3KO_d3.", "wt_d3._vs_TET3KO_d3.", "wt_d4._vs_TET3KO_d4."))
 
-# Denote significant proteins based on user defined cutoffs
 
-dep <- add_rejections(data_diff_wvT, alpha = 0.05, lfc = log2(1.5))
 
 # Plot the first and second principal components: PDF 10 x 10 inches
-
-library("RColorBrewer")
-colnames(dep)
-
-# -- Depending on what to show, the following can be used for the upcoming plots --
-
-colnames(assay(dep))
-dep <- dep[,-c(41:60)] # With this, MECP2 data is left out (for visualization)
-colnames(assay(dep))
-
-
 plot_pca_Eli <- function (dep, x = 1, y = 2, indicate = c("condition"), label = FALSE, n = 500, point_size = 4, 
                           label_size = 3, plot = TRUE) 
 {
@@ -534,11 +512,16 @@ plot_heatmap_Lukas <- function (dep,type = "centered",
   clustering_distance <- match.arg(clustering_distance)
   
   ha1 <- NULL
+  
+  #create dfs for row and column data, check validity
+  row_data <- rowData(dep, use.names = FALSE)
+  col_data <- colData(dep) %>% as.data.frame()
 
   #get only significant values
   filtered <- dep[row_data$significant,]
   
 
+  
   rowData(filtered)$mean <- rowMeans(assay(filtered), na.rm = TRUE)
   rowData(filtered)$sd <- sd(assay(filtered), na.rm = TRUE)
   df <- (assay(filtered) - rowData(filtered, use.names = FALSE)$mean)/rowData(filtered, use.names = FALSE)$sd
@@ -548,7 +531,8 @@ plot_heatmap_Lukas <- function (dep,type = "centered",
   df_kmeans <- kmeans(df, k)
   
   order <- data.frame(df) %>% cbind(., cluster = df_kmeans$cluster) %>% 
-            mutate(row = apply(.[, seq_len(ncol(.) - 1)], 1, function(x) max(x))) %>% group_by(cluster) %>% 
+            mutate(row = apply(.[, seq_len(ncol(.) - 1)], 1, function(x) max(x))) %>% 
+            group_by(cluster) %>% 
             summarize(index = sum(row)/n()) %>% 
             arrange(desc(index)) %>% 
             pull(cluster) %>% 
@@ -571,7 +555,7 @@ plot_heatmap_Lukas <- function (dep,type = "centered",
                                            "ID4", "SYN3", "PROM1", 
                                            "PROX1", "BCL2", "BAX", 
                                            "CUX1", "BCL11B", "SATB2", 
-                                           "CAMK4", "DNMT3A", "DNMT3B"
+                                           "CAMK4", "DNMT3A", "DNMT3B",
                                            "DNMT1", "UHRF1"))
   
   ann = rowAnnotation(foo = anno_mark(at = interesting, labels = row.names(df[interesting,])))
@@ -1157,20 +1141,5 @@ extract_cluster_se <-function(cmat, #matrix with cluster annotation
   return(get_df_wide(se))
 }
 
-# IF DONE FOR THE FIRST TIME ONLY!!! Export following data.frames
-# dep/xlsx is the one excel file i always import
 
-xlsx <- get_df_wide(dep)
-xlsx1 <- get_df_wide(data_norm)
-write.xlsx(xlsx, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_impute_1+Gaussian_with-MeCP2.xlsx"
-           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
-write.xlsx(xlsx1, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_Pre-imputation_with-MeCP2.xlsx"
-           , sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
-
-# If done the first time, or if the tested contrasts are changed, do also the following. File generated from xlsx variable (see step above) should not be ever modified 
-
-xlsx2 <- get_df_wide(dep)
-xlsx2 <- xlsx2[, -grep("CI", names(xlsx2))]
-write.xlsx(xlsx2, "C:\\Users\\Elisa\\Documents\\Post-doc\\Tet3 Project\\Tet3-MeCP2 project\\iNGNs project\\Proteomics_DIA_Franzi23122022\\Proteomics_iNGNs_DIA_R_DataOutput_analysis_with-MeCP2.xlsx",
-           sheetName = "Sheet1", colNames = TRUE, rowNames = TRUE)
 
